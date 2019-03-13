@@ -55,33 +55,35 @@ public class DefaultUserDetailsService implements UserDetailsService {
         sysUser.setPassword("$2a$10$KNBUMuT5Jd7ZMrLTvRPvB.81.yqVzg2761/LB8gfGJtngjFGKhvZO"); //123456
         sysUser.setSalt("ABCDEF");
 
-        SysRole sysRole = new SysRole();
-        sysRole.setId(1L);
-        sysRole.setRoleCode("1000");
-        sysRole.setRoleName("admin");
+        {
+            SysRole sysRole = new SysRole();
+            sysRole.setId(1L);
+            sysRole.setRoleName("Administrator");
+            sysRole.setRoleCode("ADMIN");
+            sysUser.getRoleList().add(sysRole);
+        }
 
-        SysPermission sysPermission = new SysPermission();
-        sysPermission.setId(1L);
-        sysPermission.setCode("1");
-        sysPermission.setName("用户管理");
-        sysPermission.setPid(0L);
-        sysPermission.setSort(0);
-        sysPermission.setType(0);
-        sysPermission.setUrl("/root/sysuser/list");
+        {
+            SysRole sysRole = new SysRole();
+            sysRole.setId(1L);
+            sysRole.setRoleName("Base Account");
+            sysRole.setRoleCode("BASE");
+            sysUser.getRoleList().add(sysRole);
+        }
 
-        sysRole.getPermissionList().add(sysPermission);
-
-        sysUser.getRoleList().add(sysRole);
+        {
+            SysRole sysRole = new SysRole();
+            sysRole.setId(1L);
+            sysRole.setRoleName("Document");
+            sysRole.setRoleCode("DOC");
+            sysUser.getRoleList().add(sysRole);
+        }
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
         for (SysRole role : sysUser.getRoleList()) {
 
-            for (SysPermission permission : role.getPermissionList()) {
-
-                authorities.add(new SimpleGrantedAuthority(permission.getCode()));
-
-            }
+            authorities.add(new SimpleGrantedAuthority(role.getRoleCode()));
 
         }
 

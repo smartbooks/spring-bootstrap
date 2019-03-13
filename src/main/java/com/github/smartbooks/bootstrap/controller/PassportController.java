@@ -63,4 +63,10 @@ public class PassportController extends BaseController {
         //用户尚未分配权限
         return "/passport/nopermission";
     }
+
+    @GetMapping("/uninitpermission")
+    public String unInitPermission(Model model) {
+        //权限清单未初始化
+        return "/passport/uninitpermission";
+    }
 }

@@ -14,9 +14,7 @@
     <div style="min-height: 720px;">
         <div class="row">
 
-            <#include "share/menu.ftl" parse=false>
-
-            <div class="col-md-10">
+            <div class="col-md-12">
                 <ol class="breadcrumb">
                     <li><a href="/home/index">管理主页</a></li>
                     <li class="active">访问拒绝</li>

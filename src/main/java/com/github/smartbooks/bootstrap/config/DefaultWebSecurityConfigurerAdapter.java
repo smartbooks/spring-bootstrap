@@ -1,5 +1,6 @@
 package com.github.smartbooks.bootstrap.config;
 
+import com.github.smartbooks.bootstrap.handler.DefaultAuthenticationSuccessHandler;
 import com.github.smartbooks.bootstrap.handler.DefaultSimpleUrlAuthenticationFailureHandler;
 import com.github.smartbooks.bootstrap.support.DefaultUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class DefaultWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
-
-    /**
-     * 自动装配授权失败处理器
-     */
-    @Autowired
-    private DefaultSimpleUrlAuthenticationFailureHandler defaultSimpleUrlAuthenticationFailureHandler;
 
     /**
      * 自动装配用户详情服务
@@ -49,8 +44,8 @@ public class DefaultWebSecurityConfigurerAdapter extends WebSecurityConfigurerAd
                 .usernameParameter("userName")
                 .passwordParameter("password")
                 .loginProcessingUrl("/passport/login")       //post提交表单
-                .successForwardUrl("/home/index")             //登陆成功跳转
-                .failureHandler(defaultSimpleUrlAuthenticationFailureHandler)
+                .successHandler(new DefaultAuthenticationSuccessHandler("/home/index"))
+                .failureHandler(new DefaultSimpleUrlAuthenticationFailureHandler("/passport/login"))
                 .permitAll()                                    //允许所有用户都有权限访问登录页面
                 .and()                                          //
                 .logout()                                       //

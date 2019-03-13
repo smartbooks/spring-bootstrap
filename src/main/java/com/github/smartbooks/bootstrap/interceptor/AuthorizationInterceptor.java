@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
@@ -23,17 +24,49 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
     private final String noSessionUrl = "/passport/login";
     private final String noPermissionUrl = "/passport/nopermission";
     private final String unAuthorizedUrl = "/passport/unauthorized";
-    public final String sessionKey = "cur_user";
-    public final String permissionKey = "sys_permission";
+    private final String unInitPermissionUrl = "/passport/uninitpermission";
+    public static final String sessionKey = "cur_user";
+    public static final String permissionKey = "sys_permission";
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 
-        try {
+        HttpSession httpSession = request.getSession();
 
-            HttpSession httpSession = request.getSession();
+        //当前请求的URL地址
+        String matchUrl = resolveRequestUrl(request.getRequestURI());
+
+        //系统全部权限清单
+        Map<String, Set<String>> sysPermissionMap = (Map<String, Set<String>>) request.getServletContext().getAttribute(permissionKey);
+
+        if (null == sysPermissionMap) {
+
+            //拒绝,资源未初始化
+            response.sendRedirect(unInitPermissionUrl);
+
+            return false;
+        }
+
+        //当前请求URL对应的权限清单
+        Set<String> permissionSet = sysPermissionMap.get(matchUrl);
+
+        if (null == permissionSet || permissionSet.size() < 1) {
+
+            //拒绝,资源未分配权限
+            response.sendRedirect(unInitPermissionUrl);
+
+            return false;
+
+        } else {
+
+            if (permissionSet.contains("IGNORE")) {
+
+                //无需授权
+                return true;
+
+            }
 
             UserDetails userDetails = (UserDetails) httpSession.getAttribute(sessionKey);
 
@@ -58,45 +91,23 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
                 return false;
             }
 
-            //当前请求的URL地址
-            String matchUrl = resolveRequestUrl(request.getRequestURI());
 
-            //系统全部权限清单
-            Map<String, Set<String>> sysPermissionMap = (Map<String, Set<String>>) request.getServletContext().getAttribute(permissionKey);
+            for (GrantedAuthority grantedAuthority : currentUserPermissionList) {
 
-            //当前请求URL对应的权限清单
-            Set<String> permissionSet = sysPermissionMap.get(matchUrl);
+                if (permissionSet.contains(grantedAuthority.getAuthority())) {
 
-            if (null == permissionSet || permissionSet.size() < 1) {
-
-                //通过,该资源无需权限
-                return true;
-
-            } else {
-
-                for (GrantedAuthority grantedAuthority : currentUserPermissionList) {
-
-                    if (permissionSet.contains(grantedAuthority.getAuthority())) {
-
-                        //通过,用户拥有资源访问权限
-                        return true;
-
-                    }
+                    //通过,用户拥有资源访问权限
+                    return true;
 
                 }
 
-                //拒绝,没有访问权限
-                response.sendRedirect(unAuthorizedUrl);
-
             }
 
-        } catch (Exception e) {
+            //拒绝,没有访问权限
+            response.sendRedirect(unAuthorizedUrl);
 
-            logger.error(e);
-
+            return false;
         }
-
-        return false;
     }
 
     private String resolveRequestUrl(String url) {

@@ -49,10 +49,10 @@ public class SysUserController extends BaseController {
         return "/root/sysuser/list";
     }
 
-    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/view", method = RequestMethod.GET)
     public String view(
             Model model,
-            @PathVariable(name = "id") Long id) {
+            @RequestParam(name = "id") Long id) {
 
         model.addAttribute("page_data", sysUserService.find(id));
 
@@ -95,10 +95,10 @@ public class SysUserController extends BaseController {
         }
     }
 
-    @RequestMapping(value = "/del/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/del", method = RequestMethod.GET)
     public String del(
             Model model,
-            @PathVariable(name = "id") Long id) {
+            @RequestParam(name = "id") Long id) {
 
         logger.debug(String.format("id:%s ", id));
 
@@ -107,10 +107,10 @@ public class SysUserController extends BaseController {
         return "redirect:/root/sysuser/list";
     }
 
-    @RequestMapping(value = "/put/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/put", method = RequestMethod.GET)
     public String put(
             Model model,
-            @PathVariable(name = "id") Long id) {
+            @RequestParam(name = "id") Long id) {
 
         logger.debug(String.format("id:%s", id));
 

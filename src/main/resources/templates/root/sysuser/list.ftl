@@ -81,10 +81,10 @@
                                     <td>${entity.password}</td>
                                     <td>${entity.salt}</td>
                                     <td>
-                                        <a href="/sysuser/view/${entity.id?c}">详情</a> |
-                                        <a href="/sysuser/put/${entity.id?c}">修改</a> |
-                                        <a href="/sysuser/del/${entity.id?c}">删除</a> |
-                                        <a href="/sysuser/add">新增</a>
+                                        <a href="/root/sysuser/view?id=${entity.id?c}">详情</a> |
+                                        <a href="/root/sysuser/put?id=${entity.id?c}">修改</a> |
+                                        <a href="/root/sysuser/del?id=${entity.id?c}">删除</a> |
+                                        <a href="/root/sysuser/add">新增</a>
                                     </td>
                                 </tr>
                             </#list>

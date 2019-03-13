@@ -6,7 +6,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +23,8 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
     private final String noSessionUrl = "/passport/login";
     private final String noPermissionUrl = "/passport/nopermission";
     private final String unAuthorizedUrl = "/passport/unauthorized";
-    private final String sessionKey = "cur_user";
-    private final String permissionKey = "sys_permission";
+    public final String sessionKey = "cur_user";
+    public final String permissionKey = "sys_permission";
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 

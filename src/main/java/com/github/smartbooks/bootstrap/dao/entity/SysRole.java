@@ -17,6 +17,8 @@ public class SysRole implements Serializable {
 
     private String roleName;
 
+    private Integer available;
+
     @OneToMany
     private List<SysPermission> permissionList = new ArrayList<>();
 
@@ -50,5 +52,13 @@ public class SysRole implements Serializable {
 
     public void setPermissionList(List<SysPermission> permissionList) {
         this.permissionList = permissionList;
+    }
+
+    public Integer getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Integer available) {
+        this.available = available;
     }
 }

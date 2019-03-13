@@ -22,6 +22,16 @@ public class SysPermission implements Serializable {
 
     private Long pid;
 
+    private Integer available;
+
+    public Integer getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Integer available) {
+        this.available = available;
+    }
+
     public Long getId() {
         return id;
     }

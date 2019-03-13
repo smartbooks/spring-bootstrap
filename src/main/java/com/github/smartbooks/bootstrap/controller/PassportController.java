@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -49,5 +50,17 @@ public class PassportController extends BaseController {
     @RequestMapping(value = "/loginoutok", method = RequestMethod.GET)
     public String loginout(Model model, HttpSession httpSession) {
         return "/passport/loginoutok";
+    }
+
+    @GetMapping("/unauthorized")
+    public String unAuthorized(Model model) {
+        //提示用户没有资源访问权限
+        return "/passport/unauthorized";
+    }
+
+    @GetMapping("/nopermission")
+    public String noPermission(Model model) {
+        //用户尚未分配权限
+        return "/passport/nopermission";
     }
 }

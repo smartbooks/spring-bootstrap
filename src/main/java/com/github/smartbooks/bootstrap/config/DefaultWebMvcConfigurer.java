@@ -1,6 +1,6 @@
 package com.github.smartbooks.bootstrap.config;
 
-import com.github.smartbooks.bootstrap.interceptor.TestInterceptor;
+import com.github.smartbooks.bootstrap.interceptor.AuthorizationInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,13 +17,13 @@ import java.util.Locale;
 public class DefaultWebMvcConfigurer implements WebMvcConfigurer {
 
     @Autowired
-    private TestInterceptor testInterceptor;
+    private AuthorizationInterceptor authorizationInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
         //注册一个拦截器
-        registry.addInterceptor(testInterceptor);
+        registry.addInterceptor(authorizationInterceptor);
 
 
         //国际化语言检测

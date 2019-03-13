@@ -27,6 +27,8 @@ public class SysUser implements Serializable {
 
     private String salt;
 
+    private Integer enable;
+
     @OneToMany
     private List<SysRole> roleList = new ArrayList<>();
 
@@ -78,18 +80,15 @@ public class SysUser implements Serializable {
         this.roleList = roleList;
     }
 
+    public Integer getEnable() {
+        return enable;
+    }
+
+    public void setEnable(Integer enable) {
+        this.enable = enable;
+    }
+
     public SysUser() {
     }
 
-    @Override
-    public String toString() {
-        return "SysUser{" +
-                "id=" + id +
-                ", userCode='" + userCode + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", salt='" + salt + '\'' +
-                ", roleList=" + roleList +
-                '}';
-    }
 }

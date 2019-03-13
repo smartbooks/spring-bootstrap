@@ -21,6 +21,9 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right" style="padding-right: 15px;">
+
+                <li><a href="/help/helpcenter/index">帮助中心</a></li>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-home"></span> 超级管理员

@@ -26,7 +26,7 @@ public class SysPermission implements Serializable {
     /**
      * 权限详细描述
      */
-    private String describe;
+    private String summary;
 
     /**
      * 权限类型:0链接节点 1文本节点
@@ -74,12 +74,12 @@ public class SysPermission implements Serializable {
         this.name = name;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public Integer getType() {

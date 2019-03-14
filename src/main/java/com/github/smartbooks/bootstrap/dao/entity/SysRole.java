@@ -34,7 +34,7 @@ public class SysRole implements Serializable {
     /**
      * 角色详细描述
      */
-    private String describe;
+    private String summary;
 
     /**
      * 是否可用:0禁用状态 1正常可用
@@ -72,14 +72,6 @@ public class SysRole implements Serializable {
         this.roleName = roleName;
     }
 
-    public String getDescribe() {
-        return describe;
-    }
-
-    public void setDescribe(String describe) {
-        this.describe = describe;
-    }
-
     public Integer getAvailable() {
         return available;
     }
@@ -94,5 +86,13 @@ public class SysRole implements Serializable {
 
     public void setPermissionList(List<SysPermission> permissionList) {
         this.permissionList = permissionList;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 }

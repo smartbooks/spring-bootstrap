@@ -1,9 +1,6 @@
 package com.github.smartbooks.bootstrap.dao.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +15,7 @@ public class SysRole implements Serializable {
      * 角色唯一ID
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
@@ -42,11 +39,23 @@ public class SysRole implements Serializable {
     private Integer available;
 
     /**
+     * 创建时间
+     */
+    private long createTime;
+
+    /**
      * 角色权限清单
      */
     @OneToMany
     private List<SysPermission> permissionList = new ArrayList<>();
 
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
 
     public Long getId() {
         return id;

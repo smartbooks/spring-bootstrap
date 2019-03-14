@@ -1,9 +1,6 @@
 package com.github.smartbooks.bootstrap.dao.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +12,8 @@ public class SysUser implements Serializable {
      * 用户唯一标识
      */
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     /**
      * 登陆账号
@@ -54,11 +51,23 @@ public class SysUser implements Serializable {
     private boolean isCredentialsNonExpired;
 
     /**
+     * 账户创建时间
+     */
+    private long createTime;
+
+    /**
      * 账户角色列表
      */
     @OneToMany
     private List<SysRole> roleList = new ArrayList<>();
 
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
 
     public Long getId() {
         return id;

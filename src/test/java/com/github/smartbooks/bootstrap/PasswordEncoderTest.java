@@ -8,11 +8,13 @@ public class PasswordEncoderTest {
     @Test
     public void encoderPassword() {
 
-        String password = "123456";
+        String password = "000000";
+
+        String salt = "000000";
 
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-        String pwd = bCryptPasswordEncoder.encode(password);
+        String pwd = bCryptPasswordEncoder.encode(password + salt);
 
         System.out.println(pwd);
 

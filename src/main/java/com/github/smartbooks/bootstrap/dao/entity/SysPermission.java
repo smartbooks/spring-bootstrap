@@ -2,6 +2,7 @@ package com.github.smartbooks.bootstrap.dao.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
@@ -15,7 +16,7 @@ public class SysPermission implements Serializable {
      * 权限唯一标识
      */
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**
@@ -57,6 +58,19 @@ public class SysPermission implements Serializable {
      * 是否可用:0禁用状态 1正常可用
      */
     private Integer available;
+
+    /**
+     * 创建时间
+     */
+    private long createTime;
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
 
     public Long getId() {
         return id;

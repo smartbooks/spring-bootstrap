@@ -1,6 +1,7 @@
 package com.github.smartbooks.bootstrap.dao.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 
@@ -14,6 +15,7 @@ public class SysPermission implements Serializable {
      * 权限唯一标识
      */
     @Id
+    @GeneratedValue
     private Long id;
 
     /**

@@ -1,6 +1,7 @@
 package com.github.smartbooks.bootstrap.dao.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
@@ -14,6 +15,7 @@ public class SysUser implements Serializable {
      * 用户唯一标识
      */
     @Id
+    @GeneratedValue
     private Long id;
 
     /**

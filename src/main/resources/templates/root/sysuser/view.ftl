@@ -19,6 +19,7 @@
             <div class="col-md-10">
                 <ol class="breadcrumb">
                     <li><a href="/home/index">管理主页</a></li>
+                    <li><a href="/root/sysuser/list">用户管理</a></li>
                     <li class="active">查看用户</li>
                 </ol>
 

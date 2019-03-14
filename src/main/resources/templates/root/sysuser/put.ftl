@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="zn_CN">
 <head>
-    <title>添加用户 - 用户管理<#include "/_layout/brand.ftl"></title>
+    <title>修改用户 - 用户管理<#include "/_layout/brand.ftl"></title>
     <#include "/_layout/head.ftl" parse=false encoding="UTF-8">
 </head>
 <body>
@@ -19,7 +19,8 @@
             <div class="col-md-10">
                 <ol class="breadcrumb">
                     <li><a href="/home/index">管理主页</a></li>
-                    <li class="active">添加用户</li>
+                    <li><a href="/root/sysuser/list">用户管理</a></li>
+                    <li class="active">修改用户</li>
                 </ol>
 
                 <!--正文内容开始-->

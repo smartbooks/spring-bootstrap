@@ -18,6 +18,7 @@
             <ul class="nav navbar-nav">
 
                 <li><a href="/root/sysuser/list">用户管理</a></li>
+                <li><a href="/root/urlmapping/index">映射管理</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right" style="padding-right: 15px;">

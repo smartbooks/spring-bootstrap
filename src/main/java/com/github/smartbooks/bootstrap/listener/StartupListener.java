@@ -32,45 +32,25 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 
             Map<String, Set<String>> permissionMap = new HashMap<>();
 
-            Set<String> ignoreRole = new HashSet<>();
-            ignoreRole.add("IGNORE");
+            //默认角色
+            Set<String> ignoreRole = AuthorizationInterceptor.ignorePermissionSet;
 
-            Set<String> baseRole = new HashSet<>();
-            baseRole.addAll(ignoreRole);
-            baseRole.add("BASE");
+            //登录角色,继承默认角色
+            Set<String> loginRole = new HashSet<>();
+            loginRole.addAll(ignoreRole);
+            loginRole.add("BASE");
 
+            //管理角色,继承登录角色
+            Set<String> adminRole = new HashSet<>();
+            adminRole.addAll(loginRole);
+            adminRole.add("ADMIN");
+
+            //文档角色,继承登录角色
             Set<String> docRole = new HashSet<>();
             docRole.add("DOC");
 
-            Set<String> userRole = new HashSet<>();
-            userRole.addAll(baseRole);
-            userRole.add("ADMIN");
-
             {
-                //DOC
-                permissionMap.put("/help/helpcenter/index", docRole);
-            }
-
-            {
-                //USER ALL
-                permissionMap.put("/root/sysuser/list", userRole);
-                permissionMap.put("/root/sysuser/view", userRole);
-                permissionMap.put("/root/sysuser/add", userRole);
-                permissionMap.put("/root/sysuser/del", userRole);
-                permissionMap.put("/root/sysuser/put", userRole);
-            }
-
-            {
-                //USER BASE
-                permissionMap.put("/profile/index", baseRole);
-                permissionMap.put("/profile/modifyPassword", baseRole);
-                permissionMap.put("/home/index", baseRole);
-                permissionMap.put("/home/error", baseRole);
-                permissionMap.put("/passport/loginoutok", baseRole);
-            }
-
-            {
-                //IGNORE
+                //IGNORE 默认角色
                 permissionMap.put("/passport/login", ignoreRole);
                 permissionMap.put("/passport/unauthorized", ignoreRole);
                 permissionMap.put("/passport/nopermission", ignoreRole);
@@ -78,6 +58,30 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
                 permissionMap.put("/error/index", ignoreRole);
                 permissionMap.put("/error", ignoreRole);
                 permissionMap.put("/", ignoreRole);
+            }
+
+            {
+                //BASE 仅登录注销角色
+                permissionMap.put("/profile/index", loginRole);
+                permissionMap.put("/profile/modifyPassword", loginRole);
+                permissionMap.put("/home/index", loginRole);
+                permissionMap.put("/home/error", loginRole);
+                permissionMap.put("/passport/loginoutok", loginRole);
+            }
+
+            {
+                //ADMIN 系统管理员角色
+                permissionMap.put("/root/sysuser/list", adminRole);
+                permissionMap.put("/root/sysuser/view", adminRole);
+                permissionMap.put("/root/sysuser/add", adminRole);
+                permissionMap.put("/root/sysuser/del", adminRole);
+                permissionMap.put("/root/sysuser/put", adminRole);
+                permissionMap.put("/root/urlmapping/index", adminRole);
+            }
+
+            {
+                //DOC 查看帮助文档角色
+                permissionMap.put("/help/helpcenter/index", docRole);
             }
 
             servletContext.setAttribute(AuthorizationInterceptor.permissionKey, permissionMap);

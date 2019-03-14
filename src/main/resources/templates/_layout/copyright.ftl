@@ -1,4 +1,3 @@
-
 <hr/>
 
 <footer class="footer text-muted">

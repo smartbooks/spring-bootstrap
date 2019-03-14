@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "userName")})
 public class SysUser implements Serializable {
 
     /**
      * 用户唯一标识
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     /**

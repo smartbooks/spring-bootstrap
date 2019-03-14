@@ -1,22 +1,22 @@
 package com.github.smartbooks.bootstrap.dao.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 
 /**
  * 权限信息表
  */
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "url")})
 public class SysPermission implements Serializable {
 
     /**
      * 权限唯一标识
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

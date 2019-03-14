@@ -9,13 +9,13 @@ import java.util.List;
  * 角色信息表
  */
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(columnNames = "roleCode")})
 public class SysRole implements Serializable {
 
     /**
      * 角色唯一ID
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

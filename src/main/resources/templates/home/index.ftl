@@ -26,7 +26,48 @@
 
                 <#if msg??>msg:${msg}</#if>
                 <#if lang??>lang:${lang}</#if>
-                
+
+                <!--表格开始-->
+                <div class="panel panel-info" style="margin-bottom: 0px;">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">全部功能</h3>
+                    </div>
+
+                    <table class="table table-hover table-striped table-condensed table-bordered center">
+
+                        <thead>
+                        <tr>
+                            <th class="center">序号</th>
+                            <th class="center">类名</th>
+                            <th class="center">方法名</th>
+                            <th class="center">URL</th>
+                            <th class="center">类型</th>
+                        </tr>
+                        </thead>
+
+                        <#if page_data??>
+                            <tbody>
+
+                            <#list page_data as entity>
+                                <tr>
+                                    <td>${entity_index+1}</td>
+                                    <td style="text-align: left;">${entity.className}</td>
+                                    <td style="text-align: left;">${entity.method}</td>
+                                    <td style="text-align: left;">
+                                        <a href="${entity.url}" target="_blank">${entity.url}</a>
+                                    </td>
+                                    <td style="text-align: left;">${entity.type}</td>
+                                </tr>
+                            </#list>
+
+                            </tbody>
+                        </#if>
+
+                    </table>
+
+                </div>
+                <!--表格结束-->
+
                 <!--正文内容结束-->
 
             </div>

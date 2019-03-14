@@ -51,13 +51,13 @@ public class DefaultWebMvcConfigurer implements WebMvcConfigurer {
         //匹配静态资源
         registry.addResourceHandler("/static/**")
                 .addResourceLocations("classpath:/static/")
-                .setCachePeriod(31556926);
+                .setCachePeriod(1);
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         //配置默认主页
-        registry.addViewController("/").setViewName("/home/index");
+        registry.addRedirectViewController("/", "/home/index");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 

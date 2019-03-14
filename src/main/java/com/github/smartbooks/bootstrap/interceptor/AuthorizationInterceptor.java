@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,6 +28,13 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
     private final String unInitPermissionUrl = "/passport/uninitpermission";
     public static final String sessionKey = "cur_user";
     public static final String permissionKey = "sys_permission";
+    public static final Set<String> ignoreUrlPrefixSet = new HashSet<>();
+    public static final Set<String> ignorePermissionSet = new HashSet<>();
+
+    static {
+        ignoreUrlPrefixSet.add("/static/");
+        ignorePermissionSet.add("IGNORE");
+    }
 
     private final Logger logger = LogManager.getLogger(this.getClass());
 
@@ -37,6 +45,17 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
         //当前请求的URL地址
         String matchUrl = resolveRequestUrl(request.getRequestURI());
+
+        for (String url : ignoreUrlPrefixSet) {
+
+            if (matchUrl.startsWith(url)) {
+
+                //通过,允许访问URL前缀
+                return true;
+
+            }
+
+        }
 
         //系统全部权限清单
         Map<String, Set<String>> sysPermissionMap = (Map<String, Set<String>>) request.getServletContext().getAttribute(permissionKey);
@@ -61,9 +80,9 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
 
         } else {
 
-            if (permissionSet.contains("IGNORE")) {
+            if (permissionSet.containsAll(ignorePermissionSet)) {
 
-                //无需授权
+                //通过,无需授权
                 return true;
 
             }

@@ -4,33 +4,57 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 
+/**
+ * 权限信息表
+ */
 @Entity
 public class SysPermission implements Serializable {
 
+    /**
+     * 权限唯一标识
+     */
     @Id
     private Long id;
 
+    /**
+     * 权限资源名称
+     */
     private String name;
 
-    private String code;
+    /**
+     * 权限详细描述
+     */
+    private String describe;
 
+    /**
+     * 权限类型:0链接节点 1文本节点
+     */
     private Integer type;
 
+    /**
+     * 资源地址
+     */
     private String url;
 
+    /**
+     * 资源图标
+     */
+    private String icon;
+
+    /**
+     * 统计排序
+     */
     private Integer sort;
 
-    private Long pid;
+    /**
+     * 父级权限:0根节点
+     */
+    private Long parentId;
 
+    /**
+     * 是否可用:0禁用状态 1正常可用
+     */
     private Integer available;
-
-    public Integer getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Integer available) {
-        this.available = available;
-    }
 
     public Long getId() {
         return id;
@@ -48,12 +72,12 @@ public class SysPermission implements Serializable {
         this.name = name;
     }
 
-    public String getCode() {
-        return code;
+    public String getDescribe() {
+        return describe;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 
     public Integer getType() {
@@ -72,6 +96,14 @@ public class SysPermission implements Serializable {
         this.url = url;
     }
 
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
     public Integer getSort() {
         return sort;
     }
@@ -80,11 +112,19 @@ public class SysPermission implements Serializable {
         this.sort = sort;
     }
 
-    public Long getPid() {
-        return pid;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setPid(Long pid) {
-        this.pid = pid;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public Integer getAvailable() {
+        return available;
+    }
+
+    public void setAvailable(Integer available) {
+        this.available = available;
     }
 }

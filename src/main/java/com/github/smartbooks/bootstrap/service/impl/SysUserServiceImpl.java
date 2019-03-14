@@ -25,8 +25,6 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
         a.setId(id);
         a.setUserName("admin");
         a.setPassword("123456");
-        a.setUserCode("100");
-        a.setSalt("FDEACB");
 
         return a;
     }
@@ -71,8 +69,6 @@ public class SysUserServiceImpl extends BaseService implements SysUserService {
                 a.setId(System.nanoTime());
                 a.setUserName("admin");
                 a.setPassword("123456");
-                a.setUserCode("100");
-                a.setSalt("FDEACB");
 
                 result.getData().add(a);
             }

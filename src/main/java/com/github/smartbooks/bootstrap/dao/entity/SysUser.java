@@ -3,8 +3,6 @@ package com.github.smartbooks.bootstrap.dao.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,25 +10,53 @@ import java.util.List;
 @Entity
 public class SysUser implements Serializable {
 
+    /**
+     * 用户唯一标识
+     */
     @Id
     private Long id;
 
-    private String userCode;
-
-    @NotNull
-    @Size(min = 5, max = 10)
+    /**
+     * 登陆账号
+     */
     private String userName;
 
-    @NotNull
-    @Size(min = 6, max = 20)
+    /**
+     * 账号密码
+     */
     private String password;
 
-    private String salt;
+    /**
+     * 账号密码盐
+     */
+    private String passwordSalt;
 
-    private Integer enable;
+    /**
+     * 账户是否可用:true允许登录 false禁用登录
+     */
+    private boolean isAccountEnabled;
 
+    /**
+     * 账户是否未锁定:true账户解锁 false账户锁定
+     */
+    private boolean isAccountNonLocked;
+
+    /**
+     * 账户是否未过期:true未过期 false已过期
+     */
+    private boolean isAccountNonExpired;
+
+    /**
+     * 凭据是否未过期:true未过期 false已过期
+     */
+    private boolean isCredentialsNonExpired;
+
+    /**
+     * 账户角色列表
+     */
     @OneToMany
     private List<SysRole> roleList = new ArrayList<>();
+
 
     public Long getId() {
         return id;
@@ -38,14 +64,6 @@ public class SysUser implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
     }
 
     public String getUserName() {
@@ -64,12 +82,44 @@ public class SysUser implements Serializable {
         this.password = password;
     }
 
-    public String getSalt() {
-        return salt;
+    public String getPasswordSalt() {
+        return passwordSalt;
     }
 
-    public void setSalt(String salt) {
-        this.salt = salt;
+    public void setPasswordSalt(String passwordSalt) {
+        this.passwordSalt = passwordSalt;
+    }
+
+    public boolean isAccountEnabled() {
+        return isAccountEnabled;
+    }
+
+    public void setAccountEnabled(boolean accountEnabled) {
+        isAccountEnabled = accountEnabled;
+    }
+
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    public boolean isAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return isCredentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
     }
 
     public List<SysRole> getRoleList() {
@@ -79,16 +129,4 @@ public class SysUser implements Serializable {
     public void setRoleList(List<SysRole> roleList) {
         this.roleList = roleList;
     }
-
-    public Integer getEnable() {
-        return enable;
-    }
-
-    public void setEnable(Integer enable) {
-        this.enable = enable;
-    }
-
-    public SysUser() {
-    }
-
 }

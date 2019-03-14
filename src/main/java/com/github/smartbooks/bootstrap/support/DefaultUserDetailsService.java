@@ -1,9 +1,8 @@
 package com.github.smartbooks.bootstrap.support;
 
-import com.github.smartbooks.bootstrap.service.SysUserService;
-import com.github.smartbooks.bootstrap.dao.entity.SysPermission;
 import com.github.smartbooks.bootstrap.dao.entity.SysRole;
 import com.github.smartbooks.bootstrap.dao.entity.SysUser;
+import com.github.smartbooks.bootstrap.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -50,10 +49,8 @@ public class DefaultUserDetailsService implements UserDetailsService {
         SysUser sysUser = new SysUser();
 
         sysUser.setUserName("admin");
-        sysUser.setUserCode("10000");
         sysUser.setId(1L);
         sysUser.setPassword("$2a$10$KNBUMuT5Jd7ZMrLTvRPvB.81.yqVzg2761/LB8gfGJtngjFGKhvZO"); //123456
-        sysUser.setSalt("ABCDEF");
 
         {
             SysRole sysRole = new SysRole();
